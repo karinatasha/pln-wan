@@ -42,16 +42,15 @@ class C_login extends CI_Controller{
                     $sess_data['logged_in'] = 'Sudah Masuk';
                     $sess_data['no_karyawan'] = $sess->no_karyawan;
                     $sess_data['status_user'] = $sess->status_user;
-                    //$sess_data['id_layanan'] = $sess->id_layanan;
+                    $sess_data['id_layanan'] = $sess->id_layanan;
                 }
                 $this->session->set_userdata($sess_data); 
                  /*redirect(base_url("c_main/home"));*/
                
-               if($this->session->userdata('status_user')=='Admin' || $this->session->userdata('status_user')=='Input') 
-               {
+               if($this->session->userdata('status_user')=='Admin' || $this->session->userdata('status_user')=='Input') {
                     redirect(base_url("c_main/home"), 'refresh');
-                }elseif($this->session->userdata('status_user')=='User' || $this->session->userdata('status_user')=='Viewer') {
-                   redirect(base_url("c_main/home_user"), 'refresh');
+                }elseif($this->session->userdata('status_user')=='Viewer') {
+                   redirect(base_url("c_gangguan/gangguan_area"), 'refresh');
                 }
                 
                 

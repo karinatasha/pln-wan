@@ -35,6 +35,40 @@ class M_data_gangguan extends CI_Model{
 
 	}
 
+	function get_gangguan_area($id_layanan){
+		$this->db->select('*');
+		$this->db->where('isDelete', 'no');
+		$this->db->where('isSolved', 'no');
+		$this->db->where('id_layanan', $id_layanan);
+		//$this->db->order_by('id_gangguan', 'DESC');
+		$this->db->order_by('open_date', 'DESC');
+		$query = $this->db->get('tb_gangguan');
+		if($query->num_rows()>0)
+		{
+			return $query->result();
+		} else{
+			return $query->result();
+		}
+
+	}
+
+	function get_histori_area($id_layanan){
+		$this->db->select('*');
+		$this->db->where('isDelete', 'no');
+		$this->db->where('isSolved', 'yes');
+		$this->db->where('id_layanan', $id_layanan);
+		//$this->db->order_by('id_gangguan', 'DESC');
+		$this->db->order_by('open_date', 'DESC');
+		$query = $this->db->get('tb_gangguan');
+		if($query->num_rows()>0)
+		{
+			return $query->result();
+		} else{
+			return $query->result();
+		}
+
+	}
+
 
 	public function get_all(){
 		$query = $this->db->query('SELECT l.*, g.*, jl.*, jg.* 
@@ -262,6 +296,12 @@ class M_data_gangguan extends CI_Model{
 	{
 		return $this->db->get_where('tb_progress', array('id_progress' => $id))->row();
 	}
+
+	function get_layanan_byid($id)
+	{
+		return $this->db->get_where('tb_layanan', array('id_layanan' => $id))->row();
+	}
+
 
 
 	/*public function tampil_gangguan_byid($id)

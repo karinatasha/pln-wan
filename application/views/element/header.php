@@ -82,6 +82,17 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">
+                                <?php
+                                if ($status_user == 'Viewer') {
+                                    echo "<li class='nav-item'> 
+                                    <a  class='nav-link' href=".base_url('c_gangguan/gangguan_area')." style='color:white' >DATA</a>
+                                    </li>
+                                    <li class='nav-item'> 
+                                    <a  class='nav-link' href=".base_url('c_gangguan/histori_area')." style='color:white' >HISTORI</a>
+                                    </li>
+                                    ";
+                                }
+                                ?>
                                 <?php 
                                 if($status_user == 'Admin' || $status_user == 'Input') {
                                     echo"
@@ -98,20 +109,17 @@
                                       
                                             </div>
                                         </li>    
-                                    ";
-                                } elseif($status_user=='User' || $status_user=='Petugas'){
-                                    echo"
-                                    <li class='nav-item'>
-                                    <a class='nav-link' href=".base_url('c_main/home_user')." style='color:white'>BERANDA</a></li>";
-                                }
+                                    
+                                    <li class='nav-item dropdown'>
+                                        <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='color:white'>PENCARIAN</a>
+                                        <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                          <a class='dropdown-item' href=".base_url('c_gangguan/tampil_searchgangguan')." style='color: black'>DATA GANGGUAN</a>
+                                          <a class='dropdown-item' href=".base_url('c_keluhan/tampil_searchkeluhan')." style='color: black'>DATA KELUHAN</a>
+                                      </div>
+                                    </li>
+                                ";
+                                } 
                                 ?>
-                                <li class='nav-item dropdown'>
-                                    <a class="nav-link dropdown-toggle" href="#"id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='color:white'>PENCARIAN</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="<?php echo base_url();?>c_gangguan/tampil_searchgangguan" style="color: black">DATA GANGGUAN</a>
-                                      <a class="dropdown-item" href="<?php echo base_url();?>c_keluhan/tampil_searchkeluhan" style="color: black">DATA KELUHAN</a>
-                                  </div>
-                                </li>
                                 <?php 
                                 if ($status_user == 'Admin') {
                                     echo " <li class='nav-item dropdown'>

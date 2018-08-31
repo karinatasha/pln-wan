@@ -966,6 +966,32 @@ class C_gangguan extends CI_Controller{
         }
     }
 
+    public function gangguan_area(){
+    	$id_layanan = $this->session->userdata('id_layanan');
+    	$data=array(
+            'title'=>'Data Gangguan - PLN',
+            'status_user' => $this->session->userdata('status_user'),
+            'gangguan_area' => $this->m_data_gangguan->get_gangguan_area($id_layanan),
+            'id_layanan' => $this->session->userdata('id_layanan')
+        	);
+        	$this->load->view('element/header', $data);
+			$this->load->view('gangguan_area', $data);
+			$this->load->view('element/footer');
+    }
+
+    public function histori_area(){
+    	$id_layanan = $this->session->userdata('id_layanan');
+    	$data=array(
+            'title'=>'Data Gangguan - PLN',
+            'status_user' => $this->session->userdata('status_user'),
+            'gangguan_area' => $this->m_data_gangguan->get_histori_area($id_layanan),
+            'id_layanan' => $this->session->userdata('id_layanan')
+        	);
+        	$this->load->view('element/header', $data);
+			$this->load->view('histori_area', $data);
+			$this->load->view('element/footer');
+    }
+
 
 
 }
