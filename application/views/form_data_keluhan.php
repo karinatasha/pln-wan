@@ -20,7 +20,7 @@
                                             <th>Penyebab</th>
                                             <th>Solusi</th>
                                             <th>Durasi</th>
-                                            <?php if ($status_user == 'Admin' || $status_user=='Petugas') {
+                                            <?php if ($status_user == 'Admin' || $status_user=='Input') {
                                               echo "<th style='width:50px'>Aksi</th>";
                                             } ?>
                                         </tr>
@@ -45,7 +45,7 @@
                                             <td><?php echo $k->penyebab_keluhan ?></td>
                                             <td><?php echo $k ->solusi_keluhan ?></td>
                                             <td><?php echo $k->durasi ?></td>
-                                            <?php if ($status_user == 'Admin' || $status_user == 'Petugas') {
+                                            <?php if ($status_user == 'Admin' || $status_user == 'Input') {
                                              ?>
                                             <td>
                                                 <div class="btn-group btn-sm">

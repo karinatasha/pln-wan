@@ -532,7 +532,7 @@ class C_gangguan extends CI_Controller{
 					 'Area  :'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
 					 'Tanggal : '.$open_date.'</br>'.
 					 'Pukul : '.$open_time.'</br>'.
-					 'telah berhasil diselesaikan.';
+					 'telah berhasil diselesaikan';
 					        // Subject email.
         $this->email->subject('Notifikasi Penambahan Data Gangguan');
  
