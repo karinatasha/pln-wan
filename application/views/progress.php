@@ -99,6 +99,7 @@
                                        <input type='hidden' id="id_gangguan" name="id_gangguan" class="form-control" value="<?php echo $id ?>" />
                                        <input type='hidden' id="open_date" name="open_date" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->open_date?>" />
                                        <input type='hidden' id="open_time" name="open_time" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->open_time?>" />
+                                       <input type='hidden' id="id_layanan" name="id_layanan" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->id_layanan?>" />
                                        <input type='time' class="form-control" name="waktu" />
                           
                                    </div>

@@ -458,6 +458,7 @@ class C_gangguan extends CI_Controller{
 		$lokasi_gangguan =  $this->input->post('lokasi_gangguan');
 		$solusi_gangguan =  $this->input->post('solusi_gangguan');
 		$id_jenisgangguan =  $this->input->post('id_jenisgangguan');
+		$id_layanan =  $this->input->post('id_layanan');
 
 
 		if ($status_progress == "2") {
@@ -528,10 +529,10 @@ class C_gangguan extends CI_Controller{
  
         // $isi_email = 'Data gangguan pada area '.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.' telah ditambahkan pada tanggal '.$open_date.' jam '.$open_time;
 
-        $isi_email = 'Data Gangguan pada : </br></br>'.
-					 'Area  :'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
-					 'Tanggal : '.$open_date.'</br>'.
-					 'Pukul : '.$open_time.'</br>'.
+        $isi_email = 'Data Gangguan pada: </br></br>'.
+					 '<b>Area</b>  		:'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
+					 '<b>Tanggal</b> 	: '.$open_date.'</br>'.
+					 '<b>Pukul</b> 		: '.$open_time.'</br>'.
 					 'telah berhasil diselesaikan';
 					        // Subject email.
         $this->email->subject('Notifikasi Penambahan Data Gangguan');
