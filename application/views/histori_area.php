@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="page-head-line">Data Gangguan Area <?php echo $this->m_data_gangguan->get_layanan_byid($id_layanan)->lokasi ?></h4>
+        <h4 class="page-head-line">Histori Area <?php echo $this->m_data_gangguan->get_layanan_byid($id_layanan)->lokasi ?></h4>
       </div>
     </div> <!-- row -->
 
