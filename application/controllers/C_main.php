@@ -5,6 +5,7 @@ class C_main extends CI_Controller {
 
  public function __construct(){
   parent::__construct();
+  $this->load->model('m_data_layanan');
   $this->load->helper('url');
  }
 
@@ -15,8 +16,9 @@ class C_main extends CI_Controller {
 
 public function home() {
   $data=array (
-    'title'=>'Beranda - PLN',
-    'status_user' => $this->session->userdata('status_user')
+    'title'=>'Beranda Admin - PLN',
+    'status_user' => $this->session->userdata('status_user'),
+    'layanan' => $this->m_data_layanan->tampil_layanan()
       );
   $this->load->view('element/header',$data);
   $this->load->view('home');

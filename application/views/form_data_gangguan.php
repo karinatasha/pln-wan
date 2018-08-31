@@ -22,7 +22,7 @@
                                             <th>Solusi</th>
                                             <th>Progress</th>
                                             <th>Durasi</th>
-                                            <?php if ($status_user == 'Admin' || $status_user == 'Petugas') {
+                                            <?php if ($status_user == 'Admin' || $status_user == 'Input') {
                                               echo "<th style='width:50px'>Aksi</th>";
                                             } ?>
                                             <th style="display: none;">SID</th>
@@ -84,7 +84,7 @@
                                               echo $g->durasi;  
                                             }
                                              ?></td>
-                                            <?php if ($status_user == 'Admin' || $status_user == 'Petugas') { ?>
+                                            <?php if ($status_user == 'Admin' || $status_user == 'Input') { ?>
                                             <td> 
                                               <div class="btn-group">
                                               <button onclick='detail_waktu(<?php echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button>

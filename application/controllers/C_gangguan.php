@@ -498,6 +498,56 @@ class C_gangguan extends CI_Controller{
 			'status_progress' => $status_progress
 		);
 		$this->m_data_gangguan->input_gangguan($data, 'tb_progress');
+
+						// Konfigurasi email.
+        $config = [
+               'useragent' => 'CodeIgniter',
+               'protocol'  => 'smtp',
+               'mailpath'  => '/usr/sbin/sendmail',
+               'smtp_host' => '10.1.2.25',
+               'smtp_user' => 'helpdesk.tikd',   // Ganti dengan email gmail Anda.
+               'smtp_pass' => 'pln@123ti',             // Password gmail Anda.
+               'smtp_port' => 25,
+               'smtp_keepalive' => TRUE,
+               'smtp_crypto' => 'SSL',
+               'wordwrap'  => TRUE,
+               'wrapchars' => 80,
+               'mailtype'  => 'html',
+               'charset'   => 'utf-8',
+               'validate'  => TRUE,
+               'crlf'      => "\r\n",
+               'newline'   => "\r\n",
+           ];
+
+        // Load library email dan konfigurasinya.
+        $this->load->library('email', $config);
+ 
+        // Pengirim dan penerima email.
+        $this->email->from('sekretariatdki.sm@pln.co.id', 'Informasi Penambahan Data Gangguan');    // Email dan nama pegirim.
+        $this->email->to('moncandani@gmail.com');                       // Penerima email.
+ 
+        // $isi_email = 'Data gangguan pada area '.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.' telah ditambahkan pada tanggal '.$open_date.' jam '.$open_time;
+
+        $isi_email = 'Data Gangguan pada : </br></br>'.
+					 'Area  :'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
+					 'Tanggal : '.$open_date.'</br>'.
+					 'Pukul : '.$open_time.'</br>'.
+					 'telah berhasil diselesaikan';
+					        // Subject email.
+        $this->email->subject('Notifikasi Penambahan Data Gangguan');
+ 
+        // Isi email. Bisa dengan format html.
+        $this->email->message($isi_email);
+ 
+        if ($this->email->send())
+        {
+            echo 'Sukses! email berhasil dikirim.';
+        }
+        else
+        {
+            echo 'Error! email tidak dapat dikirim.';
+        }   
+
 		redirect('c_gangguan/progress/'.$id_gangguan);
 	}
 
