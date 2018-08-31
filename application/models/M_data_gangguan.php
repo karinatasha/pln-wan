@@ -35,6 +35,7 @@ class M_data_gangguan extends CI_Model{
 
 	}
 
+
 	public function get_all(){
 		$query = $this->db->query('SELECT l.*, g.*, jl.*, jg.* 
 			FROM tb_gangguan g, tb_layanan l, tb_jenislayanan jl, tb_jenisgangguan jg 

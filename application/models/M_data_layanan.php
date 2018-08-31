@@ -15,6 +15,13 @@ class M_data_layanan extends CI_Model{
 
 	}
 
+	public function count_gangguan($id_layanan){
+		$this->db->where('id_layanan', $id_layanan);
+		$this->db->where('isSolved', 'no');
+		$this->db->from('tb_gangguan');
+		return $this->db->count_all_results();
+	}
+
 	function tampil_layanan(){
 		$this->db->select('*');
 		$this->db->where('isDelete', 'no');
