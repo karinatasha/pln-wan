@@ -389,7 +389,7 @@
     <script type="text/javascript">
         $(document).ready( function () {
           $('#example').dataTable({
-            dom: '<"top"B>flt<"bottom"p><"clear">',
+    
             buttons: [
                 {
                   text: 'Export Excel',
