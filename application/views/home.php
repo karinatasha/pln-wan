@@ -40,6 +40,5 @@
     $('#example').DataTable();
 } );
     $('#example').dataTable({
-      "searching": false
   });
 </script>
