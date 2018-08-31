@@ -24,6 +24,7 @@
                                             <th>NIP</th>
                                             <th>Password</th>
                                             <th>Status</th>
+                                            <th>Area</th>
                                             <th style="width:50px">Aksi</th>
                                         </tr>
                                     </thead>
@@ -40,6 +41,11 @@
                                             <td><?php echo $u->no_karyawan ?></td>
                                             <td><?php echo $u->password ?></td>
                                             <td><?php echo $u->status_user ?></td>
+                                            <td><?php if ($u->id_layanan == '28') {
+                                              echo "-";
+                                            } else{
+                                              echo $this->m_data_user->get_layanan_byid($u->id_layanan)->lokasi;
+                                            } ?></td>
                                             <td>
                                               <div class="btn-group">
                                               <form method='' action="<?php echo base_url('c_user/edit_user/'.$u->id_karyawan) ?>">

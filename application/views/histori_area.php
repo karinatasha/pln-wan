@@ -31,7 +31,7 @@
                 foreach($gangguan_area as $ga ) { ?>
                 <tr>
                   <td><?php echo $no++  ?></td>
-                  <td><?php echo $ga->open_date ?></td>
+                 <td><button onclick='detail_waktu(<?php echo $ga->id_gangguan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalX"><?php echo $ga->open_date ?></button></td>
                   <td>
                     <?php if ($ga->id_jenisgangguan=="16") {
                         echo "<p style='color:'>Belum Teridentifikasi</p>";
@@ -94,12 +94,81 @@
                   </div>
               </div><!-- modal -->
 
+               <!-- Modal Detail Waktu -->
+              <div class="modal fade" id="ModalX" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Waktu Gangguan</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="">
+                              <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                  <tbody>
+                                     <tr>
+                                        <td><strong>Open Date</strong></td>
+                                        <td style="" id="open_date"></td>
+                                    </tr>
+                                    <tr>
+                                       <td style=""><strong>Open Time</strong></td>
+                                      <td style="" id="open_time"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Close Date</strong></td>
+                                       <td style="" id="close_date"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Close Time</strong></td>
+                                       <td style="" id="close_time"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Durasi</strong></td>
+                                       <td style="" id="durasi"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+
+                          </div>
+                          </div> <!-- modal body -->
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                          </div>
+                      </div>
+                  </div>
+              </div><!-- modal -->
+
+
 <script type="text/javascript">
     $(document).ready( function () {
     $('#example').DataTable();
 } );
     $('#example').dataTable({
   });
+
+    function ket_jenisgangguan(id) {
+
+      $.ajax({
+        url: "<?php echo base_url('c_gangguan/gangguan_data') ?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+          console.table(data);
+          $('#deskripsi_jenisgangguan').text(data.deskripsi_jenisgangguan);
+          $('#jenis_gangguan').text(data.jenis_gangguan);
+          $('#ket_gangguan').text(data.ket_gangguan);
+          
+          $('#ModalY').modal('show');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log('gagal mengambil data');
+        }
+      });
+    }
 
     function ket_jenisgangguan(id) {
 

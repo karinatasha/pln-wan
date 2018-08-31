@@ -29,6 +29,12 @@ class M_data_user extends CI_Model{
 		}
     }
 
+    function get_layanan_byid($id)
+	{
+		return $this->db->get_where('tb_layanan', array('id_layanan' => $id))->row();
+	}
+
+
 	function input_user($data,$table) {
 		$this->db->insert($table, $data);
 	}

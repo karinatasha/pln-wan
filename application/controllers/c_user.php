@@ -103,6 +103,7 @@ class C_user extends CI_Controller{
 		$data=array (
 			'title'=>'Pengguna - PLN',
 			'status_user' => $this->session->userdata('status_user'),
+			'get_layanan' => $this->m_data_user->get_layanan(),
         	'user' => $this->m_data_user->edit_data($where,'tb_user')->result()
         	);
 		$this->load->view('element/header', $data);
@@ -116,12 +117,14 @@ class C_user extends CI_Controller{
 		$nama = $this->input->post('nama');
 		$password = $this->input->post('password');
 		$status_user = $this->input->post('status_user');
-		
+		$id_layanan = $this->input->post('id_layanan');
+
 		$data = array(
 			'nama' => $nama,
 			'password' => $password,
 			'status_user' => $status_user,
-			'no_karyawan' =>$no_karyawan
+			'no_karyawan' =>$no_karyawan,
+			'id_layanan' => $id_layanan
 		);
 
 		$where = array(
