@@ -18,6 +18,7 @@
                              <input type='hidden' name="id_gangguan" class="form-control" value="<?php echo $g->id_gangguan ?>" />
                              <input type='hidden' name="open_date" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($g->id_gangguan)->open_date?>" />
                              <input type='hidden' name="open_time" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($g->id_gangguan)->open_time?>" />
+                             <input type='hidden' name="id_layanan" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($g->id_gangguan)->id_layanan?>" />
                              <input type='time' class="form-control" name="waktu" />
                 
                          </div>
