@@ -31,15 +31,19 @@ class C_keluhan extends CI_Controller{
 	 } 
 
 	public function form_data_keluhan() {
-	$data=array (
-	'title'=>'Data Keluhan - PLN',
-   	'keluhan' => $this->m_data_keluhan->tampil_keluhan(),
-   	'status_user' => $this->session->userdata('status_user')
-   	);
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+				$data=array (
+				'title'=>'Data Keluhan - PLN',
+			   	'keluhan' => $this->m_data_keluhan->tampil_keluhan(),
+			   	'status_user' => $this->session->userdata('status_user')
+			   	);
 
-	  $this->load->view('element/header_coba',$data);
-	  $this->load->view('form_data_keluhan', $data);
-	  $this->load->view('element/footer');
+				  $this->load->view('element/header_coba',$data);
+				  $this->load->view('form_data_keluhan', $data);
+				  $this->load->view('element/footer');
+		} else {
+			redirect('c_main');
+		}
 	 } 
 
 	public function form_jenis_keluhan($id) {
@@ -55,15 +59,19 @@ class C_keluhan extends CI_Controller{
 
 
 	public function form_tambah_keluhan() {
-		$data = array(
-		'title'=>'Tambah Keluhan - PLN',
-		'status_user' => $this->session->userdata('status_user'),
-	  	'get_layanan' => $this->m_data_keluhan->get_layanan(),
-	  	'get_jeniskeluhan' => $this->m_data_keluhan->get_jeniskeluhan()
-	  );
-	  $this->load->view('element/header', $data);
-	  $this->load->view('form_tambah_keluhan', $data);
-	  $this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+			$data = array(
+			'title'=>'Tambah Keluhan - PLN',
+			'status_user' => $this->session->userdata('status_user'),
+		  	'get_layanan' => $this->m_data_keluhan->get_layanan(),
+		  	'get_jeniskeluhan' => $this->m_data_keluhan->get_jeniskeluhan()
+		  );
+		  $this->load->view('element/header', $data);
+		  $this->load->view('form_tambah_keluhan', $data);
+		  $this->load->view('element/footer');
+		} else {
+		      redirect('c_main');
+		}
 	 } 
 
 	 function tambah_aksi_keluhan(){
@@ -132,14 +140,18 @@ class C_keluhan extends CI_Controller{
 	}
 
 	function jeniskeluhan(){
-		$data=array(
-			'title'=>'Kategori Keluhan - PLN',
-			'status_user' => $this->session->userdata('status_user'),
-			'jeniskeluhan' => $this->m_data_keluhan->tampil_jeniskeluhan()
-		);
-		$this->load->view('element/header', $data);
-  		$this->load->view('jeniskeluhan',$data);
- 		$this->load->view('element/footer');
+			if ($_SESSION["status_user"] == 'Admin') {
+				$data=array(
+				'title'=>'Kategori Keluhan - PLN',
+				'status_user' => $this->session->userdata('status_user'),
+				'jeniskeluhan' => $this->m_data_keluhan->tampil_jeniskeluhan()
+				);
+				$this->load->view('element/header', $data);
+		  		$this->load->view('jeniskeluhan',$data);
+		 		$this->load->view('element/footer');
+			} else {
+		    redirect('c_main');
+			}
 	}
 
 	function tambah_aksi_jeniskeluhan(){
@@ -174,15 +186,19 @@ class C_keluhan extends CI_Controller{
 
 
 	function edit_jeniskeluhan($id){
-		$where = array('id_jeniskeluhan' => $id);
-		$data=array (
-			'title'=>'Kategori Keluhan - PLN',
-			'status_user' => $this->session->userdata('status_user'),
-        	'jeniskeluhan' => $this->m_data_keluhan->edit_data($where,'tb_jeniskeluhan')->result()
-        	);
-		$this->load->view('element/header', $data);
-		$this->load->view('editkeluhan',$data);
-		$this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin') {
+			$where = array('id_jeniskeluhan' => $id);
+			$data=array (
+				'title'=>'Kategori Keluhan - PLN',
+				'status_user' => $this->session->userdata('status_user'),
+	        	'jeniskeluhan' => $this->m_data_keluhan->edit_data($where,'tb_jeniskeluhan')->result()
+	        	);
+			$this->load->view('element/header', $data);
+			$this->load->view('editkeluhan',$data);
+			$this->load->view('element/footer');
+		} else {
+		    redirect('c_main');
+		}
 	}
 
 	function update_jeniskeluhan(){
@@ -226,17 +242,21 @@ class C_keluhan extends CI_Controller{
 	}
 
 	function edit_keluhan($id){
-		$where = array('id_keluhan' => $id);
-		$data=array (
-			'title'=>'Edit Keluhan - PLN',
-			'status_user' => $this->session->userdata('status_user'),
-        	'keluhan' => $this->m_data_keluhan->edit_data($where,'tb_keluhan')->result(),
-        	'get_layanan' => $this->m_data_keluhan->get_layanan(),
-	  		'get_jeniskeluhan' => $this->m_data_keluhan->get_jeniskeluhan()
-        	);
-		$this->load->view('element/header', $data);
-		$this->load->view('edit_data_keluhan',$data);
-		$this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+			$where = array('id_keluhan' => $id);
+			$data=array (
+				'title'=>'Edit Keluhan - PLN',
+				'status_user' => $this->session->userdata('status_user'),
+	        	'keluhan' => $this->m_data_keluhan->edit_data($where,'tb_keluhan')->result(),
+	        	'get_layanan' => $this->m_data_keluhan->get_layanan(),
+		  		'get_jeniskeluhan' => $this->m_data_keluhan->get_jeniskeluhan()
+	        	);
+			$this->load->view('element/header', $data);
+			$this->load->view('edit_data_keluhan',$data);
+			$this->load->view('element/footer');
+		} else {
+      		redirect('c_main');
+  		}
 	}
 
 	function update_keluhan(){
@@ -295,16 +315,20 @@ class C_keluhan extends CI_Controller{
 	}
 
 	public function tampil_searchkeluhan() {
-	  $data = array(
-	  	'title'=>'Cari Data Keluhan - PLN',
-	  	'status_user' => $this->session->userdata('status_user'),
-	  	'get_layanan' => $this->m_data_keluhan->get_layanan(),
-	  	'get_jeniskeluhan' => $this->m_data_keluhan->get_jeniskeluhan()
-	  	
-	  );
-	  $this->load->view('element/header', $data);
-	  $this->load->view('searchkeluhan',$data);
-	  $this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+			$data = array(
+		  	'title'=>'Cari Data Keluhan - PLN',
+		  	'status_user' => $this->session->userdata('status_user'),
+		  	'get_layanan' => $this->m_data_keluhan->get_layanan(),
+		  	'get_jeniskeluhan' => $this->m_data_keluhan->get_jeniskeluhan()
+		  	
+		  );
+		  $this->load->view('element/header', $data);
+		  $this->load->view('searchkeluhan',$data);
+		  $this->load->view('element/footer');
+		} else {
+			redirect('c_main');
+		}
 	 } 
 
 	public function filter_manual() 

@@ -26,14 +26,19 @@ class C_gangguan extends CI_Controller{
 		}
 	}
 	 public function history_gangguan() {
-		$data=array (
-		'title'=>'Histori Gangguan - PLN',
-		'status_user' => $this->session->userdata('status_user'),
-	   	'gangguan' => $this->m_data_gangguan->tampil_history_gangguan()
-	   	);
-	  $this->load->view('element/header',$data);
-	  $this->load->view('history_gangguan',$data);
-	  $this->load->view('element/footer');
+	 	if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+	 		$data=array (
+			'title'=>'Histori Gangguan - PLN',
+			'status_user' => $this->session->userdata('status_user'),
+		   	'gangguan' => $this->m_data_gangguan->tampil_history_gangguan()
+		   	);
+		  $this->load->view('element/header',$data);
+		  $this->load->view('history_gangguan',$data);
+		  $this->load->view('element/footer');
+	 	} else {
+			redirect('c_main');
+		}
+		
 	 } 
 
 	 public function tampil_lokasi($id) {
@@ -79,15 +84,19 @@ class C_gangguan extends CI_Controller{
 	 } 
 // 
 	public function form_tambah_gangguan() {
-		$data = array(
-		'title'=>'Tambah Gangguan - PLN',
-		'status_user' => $this->session->userdata('status_user'),
-	  	'get_layanan' => $this->m_data_gangguan->get_layanan(),
-	  	'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
-	  );
-	  $this->load->view('element/header',$data);
-	  $this->load->view('form_tambah_data_gangguan', $data);
-	  $this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+			$data = array(
+			'title'=>'Tambah Gangguan - PLN',
+			'status_user' => $this->session->userdata('status_user'),
+		  	'get_layanan' => $this->m_data_gangguan->get_layanan(),
+		  	'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
+		  );
+		  $this->load->view('element/header',$data);
+		  $this->load->view('form_tambah_data_gangguan', $data);
+		  $this->load->view('element/footer');
+		} else {
+			redirect('c_main');
+		}
 	 }
 
 	public function form_jenis_gangguan($id) {
@@ -245,17 +254,21 @@ class C_gangguan extends CI_Controller{
 	}
 
 	function edit_gangguan($id){
-		$where = array('id_gangguan' => $id);
-		$data=array (
-			'title'=>'Edit Gangguan - PLN',
-			'status_user' => $this->session->userdata('status_user'),
-        	'gangguan' => $this->m_data_gangguan->edit_data($where,'tb_gangguan')->result(),
-        	'get_layanan' => $this->m_data_gangguan->get_layanan(),
-	  		'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
-        	);
-		$this->load->view('element/header', $data);
-		$this->load->view('edit_data_gangguan',$data);
-		$this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+			$where = array('id_gangguan' => $id);
+			$data=array (
+				'title'=>'Edit Gangguan - PLN',
+				'status_user' => $this->session->userdata('status_user'),
+	        	'gangguan' => $this->m_data_gangguan->edit_data($where,'tb_gangguan')->result(),
+	        	'get_layanan' => $this->m_data_gangguan->get_layanan(),
+		  		'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
+	        	);
+			$this->load->view('element/header', $data);
+			$this->load->view('edit_data_gangguan',$data);
+			$this->load->view('element/footer');
+		} else {
+			redirect('c_main');
+		}
 	}
 
 	function update_gangguan(){
@@ -318,6 +331,7 @@ class C_gangguan extends CI_Controller{
 
 
 	function jenisgangguan(){
+		if ($_SESSION["status_user"] == 'Admin') {
 		$data=array(
 			'title'=>'Kategori Gangguan - PLN',
 			'status_user' => $this->session->userdata('status_user'),
@@ -326,9 +340,14 @@ class C_gangguan extends CI_Controller{
 		$this->load->view('element/header', $data);
   		$this->load->view('jenisgangguan',$data);
  		$this->load->view('element/footer');
+		} else {
+		    redirect('c_main');
+		}
+		
 	}
 
 	function tambah_jenisgangguan(){
+		if ($_SESSION["status_user"] == 'Admin') {
 		$data=array(
 			'title'=>'Kategori Gangguan - PLN',
 			'status_user' => $this->session->userdata('status_user'),
@@ -336,6 +355,9 @@ class C_gangguan extends CI_Controller{
 		$this->load->view('element/header', $data);
   		$this->load->view('tambahgangguan');
  		$this->load->view('element/footer');
+		} else {
+		    redirect('c_main');
+		}
 	}
 
 	function tambah_aksi_jenisgangguan(){
@@ -382,6 +404,7 @@ class C_gangguan extends CI_Controller{
 
 
 	function edit_jenisgangguan($id){
+		if ($_SESSION["status_user"] == 'Admin') {
 		$where = array('id_jenisgangguan' => $id);
 		$data=array (
 			'title'=>'Kategori Gangguan - PLN',
@@ -391,6 +414,9 @@ class C_gangguan extends CI_Controller{
 		$this->load->view('element/header', $data);
 		$this->load->view('editgangguan',$data);
 		$this->load->view('element/footer');
+		} else {
+		    redirect('c_main');
+		}
 	}
 
 	function update_jenisgangguan(){
@@ -726,20 +752,25 @@ class C_gangguan extends CI_Controller{
 	
 
 	public function tampil_searchgangguan() {
-	  $data = array(
-	  	'title'=>'Cari Data Gangguan - PLN',
-	  	'status_user' => $this->session->userdata('status_user'),
-	  	'get_layanan' => $this->m_data_gangguan->get_layanan(),
-	  	'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
-	  	
-	  );
-	  $this->load->view('element/header', $data);
-	  $this->load->view('searchgangguan',$data);
-	  $this->load->view('element/footer');
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+			$data = array(
+		  	'title'=>'Cari Data Gangguan - PLN',
+		  	'status_user' => $this->session->userdata('status_user'),
+		  	'get_layanan' => $this->m_data_gangguan->get_layanan(),
+		  	'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
+		  	
+		  );
+		  $this->load->view('element/header', $data);
+		  $this->load->view('searchgangguan',$data);
+		  $this->load->view('element/footer');
 
-	  if (isset($_SESSION['hasil_pencarian'])) {
-	  	unset($_SESSION['hasil_pencarian']);
-	  }
+		  if (isset($_SESSION['hasil_pencarian'])) {
+		  	unset($_SESSION['hasil_pencarian']);
+		  }
+		} else {
+			redirect('c_main');
+		}
+	  
 	}
 
 	 public function coba_searchgangguan() {
@@ -1045,8 +1076,9 @@ class C_gangguan extends CI_Controller{
     }
 
     public function gangguan_area(){
-    	$id_layanan = $this->session->userdata('id_layanan');
-    	$data=array(
+    	if ($_SESSION["status_user"] == 'Viewer') {
+ 		    $id_layanan = $this->session->userdata('id_layanan');
+    		$data=array(
             'title'=>'Data Gangguan - PLN',
             'status_user' => $this->session->userdata('status_user'),
             'gangguan_area' => $this->m_data_gangguan->get_gangguan_area($id_layanan),
@@ -1055,11 +1087,15 @@ class C_gangguan extends CI_Controller{
         	$this->load->view('element/header', $data);
 			$this->load->view('gangguan_area', $data);
 			$this->load->view('element/footer');
+    	} else {
+		    redirect('c_main');
+		}
     }
 
     public function histori_area(){
-    	$id_layanan = $this->session->userdata('id_layanan');
-    	$data=array(
+    	if ($_SESSION["status_user"] == 'Viewer') {
+	    	$id_layanan = $this->session->userdata('id_layanan');
+	    	$data=array(
             'title'=>'Data Gangguan - PLN',
             'status_user' => $this->session->userdata('status_user'),
             'gangguan_area' => $this->m_data_gangguan->get_histori_area($id_layanan),
@@ -1068,6 +1104,9 @@ class C_gangguan extends CI_Controller{
         	$this->load->view('element/header', $data);
 			$this->load->view('histori_area', $data);
 			$this->load->view('element/footer');
+    	} else {
+		    redirect('c_main');
+		}
     }
 
 
