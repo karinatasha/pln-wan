@@ -38,9 +38,25 @@
                              <button onclick='ket_jenisgangguan(<?php echo $ga->id_gangguan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalY"><?php echo $this->m_data_gangguan->tampil_jenisgangguan_byid($ga->id_jenisgangguan)->jenis_gangguan ?></button>
                     <?php  } ?>
                   </td>
-                  <td><?php echo $ga->lokasi_gangguan ?></td>
-                  <td><?php echo $ga->penyebab_gangguan ?></td>
-                  <td><?php echo $ga->solusi_gangguan ?></td>
+                 <td><?php 
+                   if ($ga->lokasi_gangguan == '') {
+                      echo "-";
+                   }else{
+                     echo $ga->lokasi_gangguan;
+                                              }
+                 ?></td>
+                  <td><?php 
+                      if($ga->penyebab_gangguan == '') {
+                      echo "-";
+                   } else{
+                       echo $ga->penyebab_gangguan; 
+                        }
+                      ?></td>
+                   <td><?php if($ga->solusi_gangguan == '') {
+                       echo "-";
+                     } else{
+                        echo $ga->solusi_gangguan; 
+                   } ?></td>
                   <!-- <td><?php //echo $this->m_data_gangguan->get_last_progress($ga->id_gangguan)['ket_progress']; ?></td> -->
                   <td><?php 
                      if ($this->m_data_gangguan->get_last_progress($ga->id_gangguan)['status_progress'] == 1) {
