@@ -25,11 +25,8 @@ public function home() {
   $this->load->view('home');
   $this->load->view('element/footer');
   } else {
-<<<<<<< HEAD
+
       redirect('c_main');
-=======
-    redirect('c_main');
->>>>>>> ce4d31d50341e31fd9383274a010bbc3afe6c155
   }
   
  }
