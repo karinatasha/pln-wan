@@ -265,6 +265,7 @@
         $('#example').DataTable();
     } );
         $('#example').dataTable({
+          "order": [[ 0, "desc" ]]
       });
     </script>
 
