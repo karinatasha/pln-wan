@@ -38,7 +38,7 @@ class C_keluhan extends CI_Controller{
 			   	'status_user' => $this->session->userdata('status_user')
 			   	);
 
-				  $this->load->view('element/header_coba',$data);
+				  $this->load->view('element/header',$data);
 				  $this->load->view('form_data_keluhan', $data);
 				  $this->load->view('element/footer');
 		} else {
