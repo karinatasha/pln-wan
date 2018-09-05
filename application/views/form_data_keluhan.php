@@ -40,17 +40,35 @@
                                                  <button onclick='ket_jeniskeluhan(<?php echo $k->id_keluhan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalY"><?php echo $this->m_data_keluhan->tampil_jeniskeluhan_byid($k->id_jeniskeluhan)->jenis_keluhan ?></button>
                                               <?php  } ?>
                                               </td>
-                                            <td><?php echo $k->penyebab_keluhan ?></td>
-                                            <td><?php echo $k ->solusi_keluhan ?></td>
-                                            <td><?php echo $k->durasi ?></td>
+                                            <td><?php 
+                                              if ($k->penyebab_keluhan == '') {
+                                                echo "-";
+                                              } else{
+                                                echo $k->penyebab_keluhan;
+                                              }
+                                            ?></td>
+                                            <td><?php 
+                                              if ($k->solusi_keluhan == '') {
+                                                echo "-";
+                                              } else{
+                                                echo $k->solusi_keluhan;
+                                              }
+                                            ?></td>
+                                            <td><?php 
+                                              if ($k->durasi == '') {
+                                                echo "-";
+                                              } else{
+                                                echo $k->durasi;
+                                              }
+                                            ?></td>
                                             <?php if ($status_user == 'Admin' || $status_user == 'Input') {
                                              ?>
                                             <td>
                                                 <div class="btn-group btn-sm">
                                                 <!-- <button onclick='detail_waktu(<?php //echo $k->id_keluhan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button> -->
                                                 <form method='' action="<?php echo base_url('c_keluhan/edit_keluhan/'.$k->id_keluhan) ?>">
-                                                    <button class='btn btn-default' type='submit'>Edit</button>
-                                                </form><button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $k->id_keluhan ?>)" class="btn btn-danger">Hapus</button>
+                                                    <button class='btn btn-primary' type='submit'><i class="far fa-edit"></i></button>
+                                                </form><button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $k->id_keluhan ?>)" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                               </div>
                                             </td>
                                         </tr>

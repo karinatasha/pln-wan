@@ -94,13 +94,17 @@ class C_form extends CI_Controller {
 
 
   public function tambahkeluhan() {
-    $data=array(
-      'title'=>'Kategori Keluhan - PLN',
-      'status_user' => $this->session->userdata('status_user'),
-    );
-  $this->load->view('element/header', $data);
-  $this->load->view('tambahkeluhan');
-  $this->load->view('element/footer');
+    if ($_SESSION["status_user"] == 'Admin') {
+      $data=array(
+        'title'=>'Kategori Keluhan - PLN',
+        'status_user' => $this->session->userdata('status_user'),
+      );
+    $this->load->view('element/header', $data);
+    $this->load->view('tambahkeluhan');
+    $this->load->view('element/footer');
+   } else {
+      redirect('c_main');
+  }
  }
 
 /* public function editgangguan() {

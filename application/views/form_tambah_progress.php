@@ -13,7 +13,7 @@
                     <form action="<?php echo base_url();?>c_gangguan/tambah_aksi_progress" method="post">
                         <div class="row">
                        <div class='col-md-12'>
-                         <div class="form-group">
+                         <div class="form-group" id="waktu" style="display: block">
                              <label for="date"> Waktu :  </label>
                              <input type='hidden' name="id_gangguan" class="form-control" value="<?php echo $g->id_gangguan ?>" />
                              <input type='hidden' name="open_date" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($g->id_gangguan)->open_date?>" />
@@ -101,11 +101,13 @@
           $('#lokasi_gangguan').attr('style','display:block !important');
           $('#solusi_gangguan').attr('style','display:block !important');
           $('#jenisgangguan').attr('style','display:block !important');
+          $('#waktu').attr('style','display:none !important');
         }else if(val =="1"){
            $('#penyebab_gangguan').attr('style','display:none !important');
           $('#lokasi_gangguan').attr('style','display:none !important');
           $('#solusi_gangguan').attr('style','display:none !important');
           $('#jenisgangguan').attr('style','display:none !important');
+          $('#waktu').attr('style','display:block !important');
         }
       });
     </script>

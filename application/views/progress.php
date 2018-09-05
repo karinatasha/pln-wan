@@ -37,8 +37,8 @@
                                             <?php if ($status_user == 'Admin' || $status_user == 'Input') { ?>
                                             <td>
                                               <div class="btn-group">
-                                               <button onclick='edit_progress(<?php echo $p->id_progress ?>)' id="btn-edit" class="btn btn-default btn-md" data-toggle="modal" data-target="#ModalEdit">Edit</button>
-                                            <button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $p->id_progress?>)" class="btn btn-danger">Hapus</button>
+                                               <button onclick='edit_progress(<?php echo $p->id_progress ?>)' id="btn-edit" class="btn btn-default btn-md" data-toggle="modal" data-target="#ModalEdit"><i class="far fa-edit"></i></button>
+                                            <button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $p->id_progress?>)" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                           </div>
                                           </td>
                                         <?php } ?>
