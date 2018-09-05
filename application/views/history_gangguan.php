@@ -50,9 +50,25 @@
                                                  <button onclick='ket_jenisgangguan(<?php echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalY"><?php echo $this->m_data_gangguan->tampil_jenisgangguan_byid($g->id_jenisgangguan)->jenis_gangguan ?></button>
                                               <?php  } ?>
                                               </td>
-                                            <td><?php echo $g->lokasi_gangguan ?></td>
-                                            <td><?php echo $g->penyebab_gangguan ?></td>
-                                            <td><?php echo $g->solusi_gangguan ?></td>
+                                            <td><?php 
+                                              if ($g->lokasi_gangguan == '') {
+                                                echo "-";
+                                              }else{
+                                                echo $g->lokasi_gangguan;
+                                              }
+                                               ?></td>
+                                            <td><?php 
+                                              if($g->penyebab_gangguan == '') {
+                                                echo "-";
+                                              } else{
+                                                echo $g->penyebab_gangguan; 
+                                              }
+                                            ?></td>
+                                            <td><?php if($g->solusi_gangguan == '') {
+                                                echo "-";
+                                              } else{
+                                                echo $g->solusi_gangguan; 
+                                              } ?></td>
                                             <td>
                                               <?php if($this->m_data_gangguan->get_last_progress($g->id_gangguan)== false && $status_user == 'Admin'):  ?>
                                               <center><form method='' action="<?php echo base_url('c_gangguan/tambah_progress/'.$g->id_gangguan)?>">
@@ -79,9 +95,9 @@
                                               <div class="btn-group">
                                               <!-- <button onclick='detail_waktu(<?php //echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button> -->
                                               <form method='' action="<?php echo base_url('c_gangguan/edit_gangguan/'.$g->id_gangguan) ?>">
-                                                    <button class='btn btn-default btn-sm' type='submit'>Edit</button>
+                                                    <button class='btn btn-primary btn-sm' type='submit'><i class="far fa-edit"></i></button>
                                                 </form>
-                                              <button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $g->id_gangguan ?>)" class="btn btn-danger btn-sm">Hapus</button>
+                                              <button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $g->id_gangguan ?>)" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                                             </div>
                                             </td>
                                             <td style="display: none;"><?php echo $this->m_data_gangguan->tampil_layanan($g->id_layanan)->sid ?></td>
