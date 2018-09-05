@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                   <!--   Kitchen Sink -->
                   <?php if ($status_user == 'Admin' || $status_user == 'Input') { ?>
-                             <button onclick='tambah_progress(<?php echo $id ?>)' id="btn-edit" class="btn btn-primary" data-toggle="modal" data-target="#ModalTambah"><span class="fa fa-plus"></span> TAMBAH</button>
+                             <button onclick='tambah_progress(<?php echo $id ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalTambah">TAMBAH</button>
                   <?php } ?>
                             <div class="table-responsive" style="margin-top: 20px">
                                 <table id="example" class="table table-striped table-hover">
@@ -47,9 +47,9 @@
                                     </tbody>
                                 </table>
                                 <br>
-                                <!-- <form action="<?php //echo base_url();?>c_gangguan/hasil_pencarian_gangguan">
+                                <form action="<?php echo base_url();?>c_gangguan/hasil_pencarian_gangguan">
                                   <button class="btn btn-outline-primary"><i class="fas fa-chevron-circle-left" style="margin-right: 3px"></i> KEMBALI </button>&nbsp;
-                                </form>  -->
+                                </form> 
                                 
                                 <br>
                             </div>
@@ -100,24 +100,14 @@
                               <form action="<?php echo base_url();?>c_gangguan/tambah_aksi_progress" method="post">
                                   <div class="row">
                                  <div class='col-md-12'>
-
-                                 <div class="form-group">
-                                    <label for="prodi"> Status Progress:</label>
-                                    <select class="form-control" id="status_progress" name="status_progress">
-                                      <option value="1">_____Pilih Status_____</option>
-                                      <option value="1">Penanganan </option>
-                                      <option value="2">Selesai </option>
-                                    </select>
-                                  </div>
-
-                                  <div class="form-group" id="waktu" style="display: block;">
+                                   <div class="form-group">
                                        <label for="date"> Waktu :  </label>
                                        <!-- $id = id_gangguan -->
                                        <input type='hidden' id="id_gangguan" name="id_gangguan" class="form-control" value="<?php echo $id ?>" />
                                        <input type='hidden' id="open_date" name="open_date" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->open_date?>" />
                                        <input type='hidden' id="open_time" name="open_time" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->open_time?>" />
                                        <input type='hidden' id="id_layanan" name="id_layanan" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->id_layanan?>" />
-                                       <input type='text' class="form-control" name="waktu" placeholder="hh:mm:ss" />
+                                       <input type='time' class="form-control" name="waktu" />
                           
                                    </div>
                                  </div>
@@ -125,6 +115,15 @@
                                   <div class="form-group">
                                     <label for="nama">Keterangan </label>
                                     <textarea rows="3" class="form-control" name="ket_progress"></textarea>
+                                  </div>
+
+                                 <div class="form-group">
+                                    <label for="prodi"> Status :</label>
+                                    <select class="form-control" id="status_progress" name="status_progress">
+                                      <option value="1">_____Pilih Status_____</option>
+                                      <option value="1">Penanganan </option>
+                                      <option value="2">Selesai </option>
+                                    </select>
                                   </div>
 
                                   <div class="form-group" id="jenisgangguan" style="display: none;">
@@ -193,14 +192,14 @@
                               <form action="<?php echo base_url();?>c_gangguan/update_progress" method="post">
                                   <div class="row">
                                  <div class='col-md-12'>
-                                   <div class="form-group" id="waktu_edit" style="display: block;>
+                                   <div class="form-group">
                                        <label for="date"> Waktu :  </label>
                                        <!-- $id = id_gangguan -->
                                        <input type='hidden' id="id_gangguan" name="id_gangguan" class="form-control" value="<?php echo $id ?>" />
                                        <input type='hidden' id="id_progress" name="id_progress" class="form-control" value="<?php echo $p->id_progress ?>" />
                                        <input type='hidden' id="open_date" name="open_date" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->open_date?>" />
                                        <input type='hidden' id="open_time" name="open_time" class="form-control" value="<?php echo $this->m_data_gangguan->get_gangguan_byid($id)->open_time?>" />
-                                       <input type='text' class="form-control" id="waktu" name="waktu" value="<?php echo $p->waktu ?>"/>
+                                       <input type='time' class="form-control" id="waktu" name="waktu" value="<?php echo $p->waktu ?>"/>
                           
                                    </div>
                                  </div>
@@ -323,13 +322,11 @@
           $('#lokasigangguan').attr('style','display:block !important');
           $('#solusigangguan').attr('style','display:block !important');
           $('#jenisgangguan').attr('style','display:block !important');
-          $('#waktu').attr('style','display:none !important');
         }else if(val =="1"){
            $('#penyebabgangguan').attr('style','display:none !important');
           $('#lokasigangguan').attr('style','display:none !important');
           $('#solusigangguan').attr('style','display:none !important');
           $('#jenisgangguan').attr('style','display:none !important');
-          $('#waktu').attr('style','display:block !important');
 
         }
       });
@@ -368,13 +365,11 @@
           $('#lokasigangguan_edit').attr('style','display:block !important');
           $('#solusigangguan_edit').attr('style','display:block !important');
           $('#jenisgangguan_edit').attr('style','display:block !important');
-          $('#waktu_edit').attr('style','display:none !important');
         }else if(val =="1"){
           $('#penyebabgangguan_edit').attr('style','display:none !important');
           $('#lokasigangguan_edit').attr('style','display:none !important');
           $('#solusigangguan_edit').attr('style','display:none !important');
           $('#jenisgangguan_edit').attr('style','display:none !important');
-          $('#waktu_edit').attr('style','display:block !important');
 
         }
       });

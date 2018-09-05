@@ -29,10 +29,13 @@
                            <span class="help-block" style="color: red"> <?php $error = form_error('password');
                           echo "<font style='color: red;font-size: 15px' >$error</font>";?></span> 
                         </div>
-                        <!-- <div class="form-group">
-                          <label for="comfirmpassword">Konfirmasi Password:<font color="red">*</font></td>
-                          <input type="password" id="confirmpassword" name="password" style="width:500px" class="form-control">
-                        </div> -->
+                        <div class="form-group">
+                          <label for="password">Konfirmasi Password:<font color="red">*</font></label>
+                          <input id="password" type="password" style="width:500px" class="form-control" name="konfirm_pass">
+                           <span class="help-block" style="color: red"> <?php $error = form_error('konfirm_pass');
+                          echo "<font style='color: red;font-size: 15px' >$error</font>";?></span> 
+                        </div>
+                        
                      <div class="form-group">
                           <label for="prodi">Status :<font color="red">*</font></label>
                           <select class="form-control" id="status_user" name="status_user">

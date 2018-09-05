@@ -10,18 +10,21 @@ class C_gangguan extends CI_Controller{
 	}
 
 	public function form_data_gangguan() {
-		$data=array (
-		'title'=>'Data Gangguan - PLN',
-		'status_user' => $this->session->userdata('status_user'),
-	   	'gangguan' => $this->m_data_gangguan->tampil_gangguan(),
-	   	'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan(),
-	   	//'gangguan' => $this->m_data_gangguan->get_all()
-	   	);
-	  $this->load->view('element/header',$data);
-	  $this->load->view('form_data_gangguan',$data);
-	  $this->load->view('element/footer');
-	 } 
-
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+				$data=array (
+				'title'=>'Data Gangguan - PLN',
+				'status_user' => $this->session->userdata('status_user'),
+			   	'gangguan' => $this->m_data_gangguan->tampil_gangguan(),
+			   	'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan(),
+			   	//'gangguan' => $this->m_data_gangguan->get_all()
+			   	);
+			  $this->load->view('element/header',$data);
+			  $this->load->view('form_data_gangguan',$data);
+			  $this->load->view('element/footer');
+		} else {
+			redirect('c_main');
+		}
+	}
 	 public function history_gangguan() {
 		$data=array (
 		'title'=>'Histori Gangguan - PLN',
@@ -155,7 +158,7 @@ class C_gangguan extends CI_Controller{
 				'durasi' => $input_durasi,
 				'cari_durasi' => $cari_durasi,
 				'bulan' => $bulan,
-				'tahun' => $tahun			
+				'tahun' => $tahun	
 			);
 
 		$this->m_data_gangguan->input_gangguan($data, 'tb_gangguan');
@@ -421,6 +424,18 @@ class C_gangguan extends CI_Controller{
 		$this->load->view('progress',$data);
 		$this->load->view('element/footer');
 	}
+	public function progress_pencarian($id) {
+		$data=array(
+			'title'=>'Data Progress - PLN',
+			'status_user' => $this->session->userdata('status_user'),
+			'progress' => $this->m_data_gangguan->tampil_progress($id),
+			'id' => $id,
+			'get_jenisgangguan' => $this->m_data_gangguan->get_jenisgangguan()
+		);
+		$this->load->view('element/header', $data);
+		$this->load->view('progress_pencarian',$data);
+		$this->load->view('element/footer');
+	}
 
 	function tambah_progress($id){
 		$where = array('id_gangguan' => $id);
@@ -465,7 +480,8 @@ class C_gangguan extends CI_Controller{
 			$isSolved = 'yes';
 			$close_date = date("Y-m-d");
 			date_default_timezone_set("Asia/Jakarta");
-			$close_time = date("h:i:s a");
+			$close_time = date("H:i:s");
+			$waktu = date("H:i:s"); //waktu progress otomatis jika selesai
 
 			$start_date = new DateTime($open_date.' '.$open_time);
 			$end_date = new DateTime($close_date.' '.$close_time);
@@ -490,7 +506,57 @@ class C_gangguan extends CI_Controller{
 			);
 
 			$this->m_data_gangguan->update_data($where,$data,'tb_gangguan');
-		}		
+
+			/*			// Konfigurasi email.
+		        $config = [
+		               'useragent' => 'CodeIgniter',
+		               'protocol'  => 'smtp',
+		               'mailpath'  => '/usr/sbin/sendmail',
+		               'smtp_host' => '10.1.2.25',
+		               'smtp_user' => 'helpdesk.tikd',   // Ganti dengan email gmail Anda.
+		               'smtp_pass' => 'pln@123ti',             // Password gmail Anda.
+		               'smtp_port' => 25,
+		               'smtp_keepalive' => TRUE,
+		               'smtp_crypto' => 'SSL',
+		               'wordwrap'  => TRUE,
+		               'wrapchars' => 80,
+		               'mailtype'  => 'html',
+		               'charset'   => 'utf-8',
+		               'validate'  => TRUE,
+		               'crlf'      => "\r\n",
+		               'newline'   => "\r\n",
+		           ];
+
+		        // Load library email dan konfigurasinya.
+		        $this->load->library('email', $config);
+		 
+		        // Pengirim dan penerima email.
+		        $this->email->from('sekretariatdki.sm@pln.co.id', 'Informasi Penambahan Data Gangguan');    // Email dan nama pegirim.
+		        $this->email->to('moncandani@gmail.com');                       // Penerima email.
+		 
+		        // $isi_email = 'Data gangguan pada area '.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.' telah ditambahkan pada tanggal '.$open_date.' jam '.$open_time;
+
+		        $isi_email = 'Data Gangguan pada: </br></br>'.
+							 '<b>Area</b>  		:'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
+							 '<b>Tanggal</b> 	: '.$open_date.'</br>'.
+							 '<b>Pukul</b> 		: '.$open_time.'</br>'.
+							 'telah berhasil diselesaikan';
+							        // Subject email.
+		        $this->email->subject('Notifikasi Penambahan Data Gangguan');
+		 
+		        // Isi email. Bisa dengan format html.
+		        $this->email->message($isi_email);
+		 
+		        if ($this->email->send())
+		        {
+		            echo 'Sukses! email berhasil dikirim.';
+		        }
+		        else
+		        {
+		            echo 'Error! email tidak dapat dikirim.';
+		        }*/   
+
+		} // if status progress = 2
 
 		$data=array(
 			'id_gangguan' => $id_gangguan,
@@ -499,62 +565,22 @@ class C_gangguan extends CI_Controller{
 			'status_progress' => $status_progress
 		);
 		$this->m_data_gangguan->input_gangguan($data, 'tb_progress');
-
-						// Konfigurasi email.
-        $config = [
-               'useragent' => 'CodeIgniter',
-               'protocol'  => 'smtp',
-               'mailpath'  => '/usr/sbin/sendmail',
-               'smtp_host' => '10.1.2.25',
-               'smtp_user' => 'helpdesk.tikd',   // Ganti dengan email gmail Anda.
-               'smtp_pass' => 'pln@123ti',             // Password gmail Anda.
-               'smtp_port' => 25,
-               'smtp_keepalive' => TRUE,
-               'smtp_crypto' => 'SSL',
-               'wordwrap'  => TRUE,
-               'wrapchars' => 80,
-               'mailtype'  => 'html',
-               'charset'   => 'utf-8',
-               'validate'  => TRUE,
-               'crlf'      => "\r\n",
-               'newline'   => "\r\n",
-           ];
-
-        // Load library email dan konfigurasinya.
-        $this->load->library('email', $config);
- 
-        // Pengirim dan penerima email.
-        $this->email->from('sekretariatdki.sm@pln.co.id', 'Informasi Penambahan Data Gangguan');    // Email dan nama pegirim.
-        $this->email->to('moncandani@gmail.com');                       // Penerima email.
- 
-        // $isi_email = 'Data gangguan pada area '.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.' telah ditambahkan pada tanggal '.$open_date.' jam '.$open_time;
-
-        $isi_email = 'Data Gangguan pada: </br></br>'.
-					 '<b>Area</b>  		:'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
-					 '<b>Tanggal</b> 	: '.$open_date.'</br>'.
-					 '<b>Pukul</b> 		: '.$open_time.'</br>'.
-					 'telah berhasil diselesaikan';
-					        // Subject email.
-        $this->email->subject('Notifikasi Penambahan Data Gangguan');
- 
-        // Isi email. Bisa dengan format html.
-        $this->email->message($isi_email);
- 
-        if ($this->email->send())
-        {
-            echo 'Sukses! email berhasil dikirim.';
-        }
-        else
-        {
-            echo 'Error! email tidak dapat dikirim.';
-        }   
-
 		redirect('c_gangguan/progress/'.$id_gangguan);
+
 	}
 
 	function hapus_progress($id){
 		$where = array('id_progress' => $id);
+		$status_progress = $this->db->get_where('tb_progress', $where)->row_array()['status_progress'];
+		//$where_idgangguan = $this->m_data_gangguan->get_progress_byid($where)->id_gangguan;
 		$id_gangguan = $this->db->get_where('tb_progress', $where)->row_array()['id_gangguan'];
+		if ($status_progress == 2) {
+			$data = array(
+				'isSolved' => 'no'
+			);
+			$this->m_data_gangguan->update_data($id_gangguan, $data, 'tb_gangguan');
+		}
+		
 		$this->m_data_gangguan->hapus_data($where,'tb_progress');
 		redirect('c_gangguan/progress/'.$id_gangguan);
 	}
@@ -586,7 +612,8 @@ class C_gangguan extends CI_Controller{
 			$isSolved = 'yes';
 			$close_date = date("Y-m-d");
 			date_default_timezone_set("Asia/Jakarta");
-			$close_time = date("h:i:s a");
+			$close_time = date("H:i:s");
+			$waktu = date("H:i:s"); //waktu progress otomatis jika selesai
 
 			$start_date = new DateTime($open_date.' '.$open_time);
 			$end_date = new DateTime($close_date.' '.$close_time);
@@ -610,6 +637,56 @@ class C_gangguan extends CI_Controller{
 			);
 
 			$this->m_data_gangguan->update_data($where,$data,'tb_gangguan');
+
+
+			/*Konfigurasi email.*/
+		        $config = [
+		               'useragent' => 'CodeIgniter',
+		               'protocol'  => 'smtp',
+		               'mailpath'  => '/usr/sbin/sendmail',
+		               'smtp_host' => '10.1.2.25',
+		               'smtp_user' => 'helpdesk.tikd',   // Ganti dengan email gmail Anda.
+		               'smtp_pass' => 'pln@123ti',             // Password gmail Anda.
+		               'smtp_port' => 25,
+		               'smtp_keepalive' => TRUE,
+		               'smtp_crypto' => 'SSL',
+		               'wordwrap'  => TRUE,
+		               'wrapchars' => 80,
+		               'mailtype'  => 'html',
+		               'charset'   => 'utf-8',
+		               'validate'  => TRUE,
+		               'crlf'      => "\r\n",
+		               'newline'   => "\r\n",
+		           ];
+
+		        // Load library email dan konfigurasinya.
+		        $this->load->library('email', $config);
+		 
+		        // Pengirim dan penerima email.
+		        $this->email->from('sekretariatdki.sm@pln.co.id', 'Informasi Penambahan Data Gangguan');    // Email dan nama pegirim.
+		        $this->email->to('moncandani@gmail.com');                       // Penerima email.
+		 
+		        // $isi_email = 'Data gangguan pada area '.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.' telah ditambahkan pada tanggal '.$open_date.' jam '.$open_time;
+
+		        $isi_email = 'Data Gangguan pada: </br></br>'.
+							 '<b>Area</b>  		:'.$this->m_data_gangguan->tampil_layanan($id_layanan)->lokasi.'</br>'.
+							 '<b>Tanggal</b> 	: '.$open_date.'</br>'.
+							 '<b>Pukul</b> 		: '.$open_time.'</br>'.
+							 'telah berhasil diselesaikan';
+				 // Subject email.
+		        $this->email->subject('Notifikasi Penambahan Data Gangguan');
+		        // Isi email. Bisa dengan format html.
+		        $this->email->message($isi_email);
+		        if ($this->email->send())
+		        {
+		            echo 'Sukses! email berhasil dikirim.';
+		        }
+		        else
+		        {
+		            echo 'Error! email tidak dapat dikirim.';
+		        }
+		        /*code email*/
+
 		} elseif($status_progress == '1') {
 			$isSolved = 'no';
 
@@ -787,23 +864,24 @@ class C_gangguan extends CI_Controller{
 				$hasil= $this->m_data_gangguan->cari_sid_jg_b_t_d($sid,$id_jenisgangguan,$bulan,$tahun,$durasi);
 			}
 
-			$data=array(
+			/*$data=array(
             'title'=>'Pencarian Data - PLN',
             'status_user' => $this->session->userdata('status_user'),
         	'gangguan' => $hasil
         	);
         	$this->load->view('element/header', $data);
 			$this->load->view('form_data_gangguan', $data);
-			$this->load->view('element/footer');
+			$this->load->view('element/footer'); */
 		}
 
-		//$this->hasil_pencarian_gangguan($hasil);
+		$this->hasil_pencarian_gangguan($hasil);
 	}
 
-	/*public function hasil_pencarian_gangguan($hasil=null)
+	public function hasil_pencarian_gangguan($hasil=null)
 	{
 		$data=array(
         	'status_user' => $this->session->userdata('status_user'),
+        	'title'=>'Histori Gangguan - PLN'
     	);
     	
     	if (isset($_SESSION) && !isset($hasil)) {
@@ -815,9 +893,9 @@ class C_gangguan extends CI_Controller{
 
     	$this->load->view('element/header', $data);
 		//$this->load->view('pencarian_gangguan', $data);
-		$this->load->view('form_data_gangguan', $data);
+		$this->load->view('history_gangguan', $data);
 		$this->load->view('element/footer');
-	}*/
+	}
 
 	public function detail_waktu($id)
 	{

@@ -68,8 +68,8 @@ class M_data_keluhan extends CI_Model{
    	function tampil_keluhan(){
 		$this->db->select('*');
 		$this->db->where('isDelete', 'no');
-		$this->db->order_by('id_keluhan', 'DESC');
-		/*$this->db->order_by('open_date', 'DESC');*/
+		//$this->db->order_by('id_keluhan', 'DESC');
+		$this->db->order_by('open_date', 'DESC');
 		$query = $this->db->get('tb_keluhan');
 		if($query->num_rows()>0)
 		{

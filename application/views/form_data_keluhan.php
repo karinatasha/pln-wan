@@ -13,7 +13,6 @@
                                 <table id="example" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr align="text-center">
-                                            <th>No</th>
                                             <th>Tanggal</th>
                                             <th>Area</th>
                                             <th>Jenis Keluhan</th>
@@ -32,8 +31,7 @@
 
                                         ?>
                                         <tr>
-                                            <td><?php echo $no++ ?></td>
-                                            <td><?php echo $k->open_date ?></td> <!-- tanggal -->
+                                            <td><button onclick='detail_waktu(<?php echo $k->id_keluhan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalX"><?php echo $k->open_date ?></button></td> <!-- tanggal -->
                                             <td> <button onclick='tampil_lokasi(<?php echo $k->id_layanan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalZ">Area <?php echo $this->m_data_keluhan->tampil_layanan($k->id_layanan)->lokasi ?></button> </td>
                                             <td><?php if ($k->id_jeniskeluhan=="10") {
                                               echo "<p style='color:'>Belum Teridentifikasi</p>";
@@ -49,7 +47,7 @@
                                              ?>
                                             <td>
                                                 <div class="btn-group btn-sm">
-                                                <button onclick='detail_waktu(<?php echo $k->id_keluhan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button>
+                                                <!-- <button onclick='detail_waktu(<?php //echo $k->id_keluhan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button> -->
                                                 <form method='' action="<?php echo base_url('c_keluhan/edit_keluhan/'.$k->id_keluhan) ?>">
                                                     <button class='btn btn-default' type='submit'>Edit</button>
                                                 </form><button data-toggle="modal" data-target="#exampleModal" onclick="set_id(<?php echo $k->id_keluhan ?>)" class="btn btn-danger">Hapus</button>

@@ -16,8 +16,6 @@ class C_login extends CI_Controller{
         $data=array(
             'title'=>'Masuk',
             'status_user' => $this->session->userdata('status_user'),
-            
-
         );
         $this->load->view('element/header',$data);
         $this->load->view('loginpage');

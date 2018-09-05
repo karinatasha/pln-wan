@@ -41,7 +41,15 @@
                   <td><?php echo $ga->lokasi_gangguan ?></td>
                   <td><?php echo $ga->penyebab_gangguan ?></td>
                   <td><?php echo $ga->solusi_gangguan ?></td>
-                  <td>Progress</td>
+                  <!-- <td><?php //echo $this->m_data_gangguan->get_last_progress($ga->id_gangguan)['ket_progress']; ?></td> -->
+                  <td><?php 
+                     if ($this->m_data_gangguan->get_last_progress($ga->id_gangguan)['status_progress'] == 1) {
+                      echo "<a href=".base_url('c_gangguan/progress/'.$ga->id_gangguan)." target='_blank'>Penanganan</a>";
+                     } elseif ($this->m_data_gangguan->get_last_progress($ga->id_gangguan)['status_progress'] == 2) {
+                        echo "<a href=".base_url('c_gangguan/progress/'.$ga->id_gangguan)." target='_blank'>Selesai</a>";
+                     }
+                   ?></td>
+                  
                 </tr>
               <?php } ?>
               </tbody>
@@ -127,6 +135,41 @@
                                         <td><strong>Durasi</strong></td>
                                        <td style="" id="durasi"></td>
                                     </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+
+                          </div>
+                          </div> <!-- modal body -->
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                          </div>
+                      </div>
+                  </div>
+              </div><!-- modal -->
+
+  <!-- Modal Detail Progress -->
+              <div class="modal fade" id="ModalX" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Progress Gangguan</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="">
+                              <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                  <tbody>
+                                     <tr>
+                                        <th>No</th>
+                                        <th>Waktu</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                    
+                                       
                                   </tbody>
                                 </table>
                               </div>

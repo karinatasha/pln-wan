@@ -9,7 +9,6 @@
                 <div class="row">
                 <div class="col-md-12">
                   <!--   Kitchen Sink d-->
-                            <a href="<?php echo base_url();?>c_gangguan/form_tambah_gangguan" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-plus-sign"></span> <b>TAMBAH</b> </a>
                             <div class="table-responsive" style="margin-top: 20px">
                                 <table id="example" class="table table-striped table-bordered table-hover">
                                     <thead>
@@ -40,7 +39,7 @@
 
                                         ?>
                                         <tr>
-                                            <td><?php echo $g->open_date ?></td>
+                                            <td><button onclick='detail_waktu(<?php echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalX"><?php echo $g->open_date ?></button></td>
                                             <td>
                                               <button onclick='tampil_lokasi(<?php echo $g->id_layanan ?>)' id="btn-edit" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#ModalZ">Area <?php echo $this->m_data_gangguan->tampil_layanan($g->id_layanan)->lokasi ?></button></td>
                                            <!--  <td><?php //echo anchor('c_gangguan/form_jenis_gangguan/'.$g->id_gangguan, $this->m_data_gangguan->tampil_jenisgangguan_byid($g->id_jenisgangguan)->jenis_gangguan); ?> </td> -->
@@ -61,14 +60,14 @@
                                                   </form></center>
                                               <?php else: ?>
                                                 <?php if ($this->m_data_gangguan->get_last_progress($g->id_gangguan)['status_progress'] == 1): ?>
-                                                    <a href="<?php echo base_url('c_gangguan/progress/'.$g->id_gangguan) ?>">Penanganan</a><br>
+                                                    <a href="<?php echo base_url('c_gangguan/progress/'.$g->id_gangguan) ?>"  target='_blank'>Penanganan</a><br>
                                                     <?php if ($status_user == 'Admin') { ?>
                                                    <center><form method='' action="<?php echo base_url('c_gangguan/tambah_progress/'.$g->id_gangguan)?>">
                                                      <button class="btn btn-outline-dark btn-sm" type='submit'><i class="fas fa-plus-square"></i> </button>
                                                   </form></center>
                                                 <?php } ?>
                                                     <?php elseif($this->m_data_gangguan->get_last_progress($g->id_gangguan)['status_progress'] == 2): ?>
-                                                      <a href="<?php echo base_url('c_gangguan/progress/'.$g->id_gangguan) ?>">Selesai</a>
+                                                      <a href="<?php echo base_url('c_gangguan/progress/'.$g->id_gangguan) ?>"  target='_blank'>Selesai</a>
                                                       <?php else: ?>
                                                 <?php endif ?>
                                                 
@@ -78,7 +77,7 @@
                                             <?php if ($status_user == 'Admin') { ?>
                                             <td> 
                                               <div class="btn-group">
-                                              <button onclick='detail_waktu(<?php echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button>
+                                              <!-- <button onclick='detail_waktu(<?php //echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalX">Detail</button> -->
                                               <form method='' action="<?php echo base_url('c_gangguan/edit_gangguan/'.$g->id_gangguan) ?>">
                                                     <button class='btn btn-default btn-sm' type='submit'>Edit</button>
                                                 </form>

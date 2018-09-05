@@ -137,8 +137,12 @@
                                 </li>";
                                 }   
                                  ?>
-                                <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url();?>c_main/logout" style='color:white' >KELUAR</a></li>
+                                 <?php if ($status_user == 'Admin' || $status_user == 'Viewer' || $status_user =='Input') {
+                                    echo "
+                                     <li class='nav-item'>
+                                    <a class='nav-link' href=".base_url('c_main/logout')." style='color:white' >KELUAR</a></li>";
+                                 } ?>
+                                
                             </ul>
                         </div>
                     </nav>
