@@ -15,7 +15,8 @@ class C_main extends CI_Controller {
 
 
 public function home() {
-  $data=array (
+  if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+    $data=array (
     'title'=>'Beranda Admin - PLN',
     'status_user' => $this->session->userdata('status_user'),
     'layanan' => $this->m_data_layanan->tampil_layanan()
@@ -23,6 +24,10 @@ public function home() {
   $this->load->view('element/header',$data);
   $this->load->view('home');
   $this->load->view('element/footer');
+  } else {
+    redirect('c_main');
+  }
+  
  }
 
  public function home_user() {

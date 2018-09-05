@@ -507,7 +507,7 @@ class C_gangguan extends CI_Controller{
 
 			$this->m_data_gangguan->update_data($where,$data,'tb_gangguan');
 
-			/*			// Konfigurasi email.
+						// Konfigurasi email.
 		        $config = [
 		               'useragent' => 'CodeIgniter',
 		               'protocol'  => 'smtp',
@@ -554,7 +554,7 @@ class C_gangguan extends CI_Controller{
 		        else
 		        {
 		            echo 'Error! email tidak dapat dikirim.';
-		        }*/   
+		        }
 
 		} // if status progress = 2
 
