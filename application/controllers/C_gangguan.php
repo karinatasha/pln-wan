@@ -10,7 +10,7 @@ class C_gangguan extends CI_Controller{
 	}
 
 	public function form_data_gangguan() {
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 				$data=array (
 				'title'=>'Data Gangguan - PLN',
 				'status_user' => $this->session->userdata('status_user'),
@@ -26,7 +26,7 @@ class C_gangguan extends CI_Controller{
 		}
 	}
 	 public function history_gangguan() {
-	 	if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+	 	if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 	 		$data=array (
 			'title'=>'Histori Gangguan - PLN',
 			'status_user' => $this->session->userdata('status_user'),
@@ -84,7 +84,7 @@ class C_gangguan extends CI_Controller{
 	 } 
 // 
 	public function form_tambah_gangguan() {
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 			$data = array(
 			'title'=>'Tambah Gangguan - PLN',
 			'status_user' => $this->session->userdata('status_user'),
@@ -254,7 +254,7 @@ class C_gangguan extends CI_Controller{
 	}
 
 	function edit_gangguan($id){
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 			$where = array('id_gangguan' => $id);
 			$data=array (
 				'title'=>'Edit Gangguan - PLN',
@@ -752,7 +752,7 @@ class C_gangguan extends CI_Controller{
 	
 
 	public function tampil_searchgangguan() {
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 			$data = array(
 		  	'title'=>'Cari Data Gangguan - PLN',
 		  	'status_user' => $this->session->userdata('status_user'),
@@ -1076,7 +1076,7 @@ class C_gangguan extends CI_Controller{
     }
 
     public function gangguan_area(){
-    	if ($_SESSION["status_user"] == 'Viewer') {
+    	if ($_SESSION["status_user"] == 'User') {
  		    $id_layanan = $this->session->userdata('id_layanan');
     		$data=array(
             'title'=>'Data Gangguan - PLN',
@@ -1093,7 +1093,7 @@ class C_gangguan extends CI_Controller{
     }
 
     public function histori_area(){
-    	if ($_SESSION["status_user"] == 'Viewer') {
+    	if ($_SESSION["status_user"] == 'User') {
 	    	$id_layanan = $this->session->userdata('id_layanan');
 	    	$data=array(
             'title'=>'Data Gangguan - PLN',

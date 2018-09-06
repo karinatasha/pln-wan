@@ -31,7 +31,7 @@ class C_keluhan extends CI_Controller{
 	 } 
 
 	public function form_data_keluhan() {
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 				$data=array (
 				'title'=>'Data Keluhan - PLN',
 			   	'keluhan' => $this->m_data_keluhan->tampil_keluhan(),
@@ -59,7 +59,7 @@ class C_keluhan extends CI_Controller{
 
 
 	public function form_tambah_keluhan() {
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 			$data = array(
 			'title'=>'Tambah Keluhan - PLN',
 			'status_user' => $this->session->userdata('status_user'),
@@ -242,7 +242,7 @@ class C_keluhan extends CI_Controller{
 	}
 
 	function edit_keluhan($id){
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 			$where = array('id_keluhan' => $id);
 			$data=array (
 				'title'=>'Edit Keluhan - PLN',
@@ -315,7 +315,7 @@ class C_keluhan extends CI_Controller{
 	}
 
 	public function tampil_searchkeluhan() {
-		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+		if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
 			$data = array(
 		  	'title'=>'Cari Data Keluhan - PLN',
 		  	'status_user' => $this->session->userdata('status_user'),
