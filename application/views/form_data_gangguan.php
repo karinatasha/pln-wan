@@ -75,7 +75,7 @@
                                               } ?></td>
                                             <td>
                                               <?php if($this->m_data_gangguan->get_last_progress($g->id_gangguan)== false && ($status_user == 'Admin' || $status_user == 'Petugas')):  ?>
-                                                 <center><form method='' action="<?php echo base_url('c_gangguan/tambah_progress/'.$g->id_gangguan)?>">
+                                                 <center><form method='' action="<?php echo base_url('c_gangguan/tambah_progress/'.$g->id_gangguan)?>" target='_blank'>
                                                      <button class="btn btn-outline-dark btn-sm" type='submit'><i class="fas fa-plus-square"></i> </button>
                                                   </form></center>
                                               <!-- <center><button onclick='tambah_progress(<?php //echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#ModalTambah"><i class="fas fa-plus-square"></i></button></center> -->
@@ -83,7 +83,7 @@
                                                 <?php if ($this->m_data_gangguan->get_last_progress($g->id_gangguan)['status_progress'] == 1): ?>
                                                     <a href="<?php echo base_url('c_gangguan/progress/'.$g->id_gangguan) ?>" target='_blank'>Penanganan</a><br>
                                                     <?php if ($status_user == 'Admin' || $status_user == 'Petugas') { ?>
-                                                       <center><form method='' action="<?php echo base_url('c_gangguan/tambah_progress/'.$g->id_gangguan)?>">
+                                                       <center><form method='' action="<?php echo base_url('c_gangguan/tambah_progress/'.$g->id_gangguan)?>" target='_blank'>
                                                              <button class="btn btn-outline-dark btn-sm" type='submit'><i class="fas fa-plus-square"></i> </button>
                                                           </form></center>
                                                      <!--  <center><button onclick='tambah_progress(<?php //echo $g->id_gangguan ?>)' id="btn-edit" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#ModalTambah"><i class="fas fa-plus-square"></i></button></center> -->
