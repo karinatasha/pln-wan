@@ -41,8 +41,8 @@
                           <select class="form-control" id="status_user" name="status_user">
                             <option value="_">_____Pilih Status_____</option>
                             <option value="Admin">Admin</option>
-                            <option value="Input">Petugas Input</option>
-                            <option value="Viewer">Petugas Viewer</option>
+                            <option value="Petugas">Petugas</option>
+                            <option value="User">User</option>
                           </select>
                            <span class="help-block" style="color: red"> <?php $error = form_error('status_user');
                           echo "<font style='color: red;font-size: 15px' >$error</font>";?></span> 
