@@ -83,7 +83,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">
                                 <?php
-                                if ($status_user == 'Viewer') {
+                                if ($status_user == 'User') {
                                     echo "<li class='nav-item'> 
                                     <a  class='nav-link' href=".base_url('c_gangguan/gangguan_area')." style='color:white' >DATA</a>
                                     </li>
