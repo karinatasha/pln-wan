@@ -75,7 +75,7 @@
 <script type="text/javascript">
    $('#status_user').on('change', function(){
         var val = this.value;
-        if(val == "Viewer"){
+        if(val == "User"){
           $('#area').attr('style','display:block !important');
         }else {
            $('#area').attr('style','display:none !important');

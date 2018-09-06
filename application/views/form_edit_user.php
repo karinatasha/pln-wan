@@ -33,18 +33,22 @@
                           <select class="form-control" name="status_user" id="status_user">
                             <?php echo "<option value='$u->status_user'>-- $u->status_user --</option>"; ?>
                             <option value="Admin">Admin</option>
-                            <option value="Input">Petugas Input</option>
-                            <option value="Viewer">Petugas Viewer</option>
+                            <option value="Petugas">Petugas</option>
+                            <option value="User">User</option>
                           </select>
                         </div>
                          <div class="form-group" id="area" style="display: none">
                           <label for="area">Area <font color="red">*</font></label>
                           <select id="area" name="id_layanan" class="form-control">
+                          <?php if ($u->id_layanan == 28) { ?>
+                          <option value="28">--Pilih Area--</option>
+                        <?php } else { ?>
                           <option value="<?php echo $u->id_layanan ?>">--<?php echo $this->m_data_user->get_layanan_byid($u->id_layanan)->lokasi ?>--</option>
                            <?php 
                              foreach($get_layanan as $gl){ 
                              echo "<option  value='$gl->id_layanan'>$gl->lokasi</option>";
                              }
+                          }
                           ?>
                           </select>
                           <span class="help-block" style="color: red"> <?php $error = form_error('id_layanan');
@@ -67,7 +71,7 @@
 <script type="text/javascript">
    $('#status_user').on('change', function(){
         var val = this.value;
-        if(val == "Viewer"){
+        if(val == "User"){
           $('#area').attr('style','display:block !important');
         }else {
            $('#area').attr('style','display:none !important');

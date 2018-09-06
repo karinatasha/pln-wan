@@ -42,7 +42,15 @@
                   <td><?php echo $ga->lokasi_gangguan ?></td>
                   <td><?php echo $ga->penyebab_gangguan ?></td>
                   <td><?php echo $ga->solusi_gangguan ?></td>
-                  <td>Progress</td>
+                  <td>
+                    <?php 
+                     if ($this->m_data_gangguan->get_last_progress($ga->id_gangguan)['status_progress'] == 1) {
+                      echo "<a href=".base_url('c_gangguan/progress/'.$ga->id_gangguan)." target='_blank'>Penanganan</a>";
+                     } elseif ($this->m_data_gangguan->get_last_progress($ga->id_gangguan)['status_progress'] == 2) {
+                        echo "<a href=".base_url('c_gangguan/progress/'.$ga->id_gangguan)." target='_blank'>Selesai</a>";
+                     }
+                   ?>
+                  </td>
                   <td><?php echo $ga->durasi ?></td>
                 </tr>
               <?php } ?>

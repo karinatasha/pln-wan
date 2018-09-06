@@ -45,9 +45,9 @@ class C_login extends CI_Controller{
                 $this->session->set_userdata($sess_data); 
                  /*redirect(base_url("c_main/home"));*/
                
-               if($this->session->userdata('status_user')=='Admin' || $this->session->userdata('status_user')=='Input') {
+               if($this->session->userdata('status_user')=='Admin' || $this->session->userdata('status_user')=='Petugas') {
                     redirect(base_url("c_main/home"), 'refresh');
-                }elseif($this->session->userdata('status_user')=='Viewer') {
+                }elseif($this->session->userdata('status_user')=='User') {
                    redirect(base_url("c_gangguan/gangguan_area"), 'refresh');
                 }
                 
