@@ -94,7 +94,7 @@
                                 }
                                 ?>
                                 <?php 
-                                if($status_user == 'Admin' || $status_user == 'Input') {
+                                if($status_user == 'Admin' || $status_user == 'Petugas') {
                                     echo"
                                     <li class='nav-item'> 
                                     <a  class='nav-link' href=".base_url('c_main/home')." style='color:white' >BERANDA</a>
@@ -137,7 +137,7 @@
                                 </li>";
                                 }   
                                  ?>
-                                 <?php if ($status_user == 'Admin' || $status_user == 'Viewer' || $status_user =='Input') {
+                                 <?php if ($status_user == 'Admin' || $status_user == 'User' || $status_user =='Petugas') {
                                     echo "
                                      <li class='nav-item'>
                                     <a class='nav-link' href=".base_url('c_main/logout')." style='color:white' >KELUAR</a></li>";

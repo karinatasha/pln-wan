@@ -15,7 +15,7 @@ class C_main extends CI_Controller {
 
 
 public function home() {
-  if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Input') {
+  if ($_SESSION["status_user"] == 'Admin' || $_SESSION["status_user"] == 'Petugas') {
     $data=array (
     'title'=>'Beranda Admin - PLN',
     'status_user' => $this->session->userdata('status_user'),
